@@ -3,31 +3,28 @@ package cracking.coding.interview.tests;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.List;
-
-class StringTest {
+class ArraysAndStringsTest {
 
     @Test
     void givenAllCharactersAreUnique_WhenAStringWithUniqueCharactersIsTested_ThenShouldReturnTrue() {
         String value = "single";
-        Assertions.assertTrue(Strings.allCharactersAreUnique(value));
+        Assertions.assertTrue(ArraysAndStrings.allCharactersAreUnique(value));
     }
 
     @Test
     void givenAllCharactersAreUnique_WhenAStringWithNonUniqueCharactersIsTested_ThenShouldReturnFalse() {
         String value = "lorem ipsum";
-        Assertions.assertFalse(Strings.allCharactersAreUnique(value));
+        Assertions.assertFalse(ArraysAndStrings.allCharactersAreUnique(value));
 
         String value2 = "mmodislbkh";
-        Assertions.assertFalse(Strings.allCharactersAreUnique(value2));
+        Assertions.assertFalse(ArraysAndStrings.allCharactersAreUnique(value2));
 
     }
 
     @Test
     void givenAllCharactersAreUnique_WhenAStringWithCaseDifferentButSameCharacter_ThenShouldReturnTrue() {
         String value = "lorem ipsuM";
-        Assertions.assertTrue(Strings.allCharactersAreUnique(value));
+        Assertions.assertTrue(ArraysAndStrings.allCharactersAreUnique(value));
     }
 
     @Test
@@ -35,11 +32,11 @@ class StringTest {
         String a = "ABCD";
         String b ="BCKADBACCBAD";
 
-        Assertions.assertTrue(Strings.checkPermutation(a, b));
+        Assertions.assertTrue(ArraysAndStrings.checkPermutation(a, b));
 
         String c ="BADTOTHEBONEBDCA";
 
-        Assertions.assertTrue(Strings.checkPermutation(a, c));
+        Assertions.assertTrue(ArraysAndStrings.checkPermutation(a, c));
 
     }
 
@@ -48,7 +45,7 @@ class StringTest {
         String a = "ABCD";
         String b ="BCKADJACSCBLAD";
 
-        Assertions.assertFalse(Strings.checkPermutation(a, b));
+        Assertions.assertFalse(ArraysAndStrings.checkPermutation(a, b));
     }
 
     @Test
@@ -56,11 +53,11 @@ class StringTest {
         String a = "ABCD";
         String b ="BCKADBACCBAD";
 
-        Assertions.assertTrue(Strings.hasPermutation(a, b));
+        Assertions.assertTrue(ArraysAndStrings.hasPermutation(a, b));
 
         String c ="BADTOTHEBONEBDCA";
 
-        Assertions.assertTrue(Strings.hasPermutation(a, c));
+        Assertions.assertTrue(ArraysAndStrings.hasPermutation(a, c));
     }
 
 //    @Test
@@ -74,12 +71,12 @@ class StringTest {
     @Test
     void givenURLify_WhenStringHasWithWitheSpaces_ThenShouldReturnUrlified() {
         String a = "STRING TO BE URLIFIED";
-        String result = Strings.URLify(a);
+        String result = ArraysAndStrings.URLify(a);
 
         Assertions.assertEquals("STRING%20TO%20BE%20URLIFIED", result);
 
         String b = "STRING TO BE    URLIFIED";
-        String resultB = Strings.URLify(b);
+        String resultB = ArraysAndStrings.URLify(b);
 
         Assertions.assertEquals("STRING%20TO%20BE%20%20%20%20URLIFIED", resultB);
 
@@ -90,18 +87,18 @@ class StringTest {
     void givenIsPalindrome_WhenAPalindromeIsPassed_ThenShouldReturnTrue() {
         String a = "subi no onibus";
 
-        Assertions.assertTrue(Strings.isPalindrome(a));
+        Assertions.assertTrue(ArraysAndStrings.isPalindrome(a));
     }
 
     @Test
     void givenIsPalindrome_WhenANotPalindromeIsPassed_ThenShouldReturnFalse() {
         String a = "batman";
 
-        Assertions.assertFalse(Strings.isPalindrome(a));
+        Assertions.assertFalse(ArraysAndStrings.isPalindrome(a));
 
         String b = "sata";
 
-        Assertions.assertFalse(Strings.isPalindrome(b));
+        Assertions.assertFalse(ArraysAndStrings.isPalindrome(b));
     }
 
     @Test
@@ -109,17 +106,17 @@ class StringTest {
         String a = "pale";
         String b = "male";
 
-        Assertions.assertTrue(Strings.oneAway(a, b));
+        Assertions.assertTrue(ArraysAndStrings.oneAway(a, b));
 
         b = "ale";
-        Assertions.assertTrue(Strings.oneAway(a, b));
+        Assertions.assertTrue(ArraysAndStrings.oneAway(a, b));
 
 
         b = "pales";
-        Assertions.assertTrue(Strings.oneAway(a, b));
+        Assertions.assertTrue(ArraysAndStrings.oneAway(a, b));
 
         b = "bake";
-        Assertions.assertFalse(Strings.oneAway(a, b));
+        Assertions.assertFalse(ArraysAndStrings.oneAway(a, b));
 
 
     }
@@ -127,15 +124,29 @@ class StringTest {
     @Test
     void givenStringCompression_ThenShouldReturnCompressedString() {
         String a = "aabcccccaaa";
-        String result = Strings.stringCompression(a);
+        String result = ArraysAndStrings.stringCompression(a);
 
         Assertions.assertEquals("a2b1c5a3", result);
 
         a = "abcd";
-        Assertions.assertEquals("abcd", Strings.stringCompression(a));
+        Assertions.assertEquals("abcd", ArraysAndStrings.stringCompression(a));
 
         a = "abccccdDDD";
-        Assertions.assertEquals("a1b1c4d4", Strings.stringCompression(a));
+        Assertions.assertEquals("a1b1c4d4", ArraysAndStrings.stringCompression(a));
+    }
+
+    @Test
+    void givenRotateNxNMatrix_ThenShouldReturnARotatedMatrix() {
+        byte[][] matrix = new byte[2][2];
+        matrix[0][0] = 1;
+        matrix[0][1] = 2;
+        matrix[1][0] = 3;
+        matrix[1][1] = 4;
+
+        byte[][] result = ArraysAndStrings.rotateMatrix(matrix);
+
+        Assertions.assertEquals(4, result[0][1]);
+        Assertions.assertEquals(2, result[1][1]);
     }
 
 }

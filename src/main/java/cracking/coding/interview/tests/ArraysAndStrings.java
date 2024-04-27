@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Strings {
+public class ArraysAndStrings {
 
     // Is Unique: Implement an algorithm to determine if a string has all unique characters. What if you
     // cannot use additional data structures?
@@ -320,5 +320,25 @@ public class Strings {
         public int count;
     }
 
+
+    //    Rotate Matrix: Given an image represented by an NxN matrix, where each pixel in the image is 4
+    //    bytes, write a method to rotate the image by 90 degrees. Can you do this in place?
+    //    Hints:#51, #100
+    public static byte[][] rotateMatrix(byte[][] matrix) {
+
+        for (int i = matrix.length; i > 0; i--) {
+
+
+            for (int j = matrix.length; j > 0; j--) {
+
+                byte temp = matrix[matrix.length - i][matrix.length - j];
+                matrix[matrix.length - i][matrix.length - j] = matrix[j - 1][matrix.length - j];
+                matrix[j - 1][matrix.length - j] = temp;
+            }
+
+        }
+
+        return matrix;
+    }
 
 }
