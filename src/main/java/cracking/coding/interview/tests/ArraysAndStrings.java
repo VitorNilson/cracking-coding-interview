@@ -341,4 +341,36 @@ public class ArraysAndStrings {
         return matrix;
     }
 
+    //    Zero Matrix: Write an algorithm such that if an element in an MxN matrix is 0, its entire row and
+    //    column are set to 0.
+    //    Hints:#17, #74, #102
+    //TODO find a way to use the matrix itself to store data.
+    public static int[][] zeroMatrix(int[][] matrix) {
+
+        Map<Integer, Integer> colVal = new HashMap<>();
+        outer:
+        for (int i = 0; i < matrix.length; i++) {
+            int[] row = matrix[i];
+            for (int j = 0; j < row.length; j++) {
+                if (row[j] == 0) {
+                    colVal.put(i, j);
+                    continue outer;
+                }
+            }
+        }
+
+        for (Map.Entry<Integer, Integer> e : colVal.entrySet()) {
+            int[] row = matrix[e.getKey()];
+            Arrays.fill(row, 0);
+
+            for (int i = 0; i < matrix.length; i++) {
+                matrix[i][e.getValue()] = 0;
+            }
+
+        }
+
+        return matrix;
+    }
+
+
 }

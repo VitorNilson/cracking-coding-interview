@@ -149,4 +149,42 @@ class ArraysAndStringsTest {
         Assertions.assertEquals(2, result[1][1]);
     }
 
+    @Test
+    void givenZeroMatrix_WhenAMatrixWithZeroValueInARow_ThenTheEntireRowWouldBeZero() {
+        int[][] matrix = new int[2][3];
+        matrix[0][0] = 1;
+        matrix[0][1] = 2;
+        matrix[0][2] = 2;
+        matrix[1][0] = 3;
+        matrix[1][1] = 4;
+        matrix[1][2] = 0;
+
+        int[][] result = ArraysAndStrings.zeroMatrix(matrix);
+
+        Assertions.assertEquals(0, result[1][0]);
+        Assertions.assertEquals(0, result[1][1]);
+        Assertions.assertEquals(0, result[1][2]);
+
+        int[][] matrix2 = new int[3][4];
+        matrix2[0][0] = 1;
+        matrix2[0][1] = 0;
+        matrix2[0][2] = 2;
+        matrix2[0][3] = 2;
+        matrix2[1][0] = 3;
+        matrix2[1][1] = 4;
+        matrix2[1][2] = 3;
+        matrix2[1][3] = 8;
+        matrix2[2][0] = 3;
+        matrix2[2][1] = 4;
+        matrix2[2][2] = 0;
+        matrix2[2][3] = 3;
+
+        int[][] result2 = ArraysAndStrings.zeroMatrix(matrix2);
+
+        Assertions.assertEquals(0, result2[0][0]);
+        Assertions.assertEquals(0, result2[0][1]);
+        Assertions.assertEquals(0, result2[0][2]);
+
+    }
+
 }
