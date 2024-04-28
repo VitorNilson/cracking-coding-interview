@@ -25,4 +25,20 @@ public class LinkedLists {
             curr = curr.getNext();
         }
     }
+
+    //    2.2 Return Kth to Last: Implement an algorithm to find the kth to last element of a singly linked list.
+    //            Hints:#8, #25, #41, #67, #126
+    public static LinkedList<Integer> findElement(LinkedList<Integer> head, int pos) {
+        int currentIndex = 0;
+        LinkedList<Integer> curr = head;
+
+        while (curr != null) {
+            if (currentIndex++ == pos) {
+                return curr;
+            }
+
+            curr = curr.getNext();
+        }
+        return null;
+    }
 }

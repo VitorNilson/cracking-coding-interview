@@ -42,6 +42,23 @@ class LInkedListsTest {
         Assertions.assertEquals(0, countDuplicatesAndValidateSequentialLinkedList(head2));
     }
 
+
+    @Test
+    void givenFindElement_WhenThePositionIsLessThanEqualsTotalOfElements_ThenShouldReturnItemCorrespondingToAskedPosition() {
+
+        LinkedList<Integer> head = new LinkedList<>(1);
+        head.addToBottom(new LinkedList<>(2));
+        head.addToBottom(new LinkedList<>(3));
+        head.addToBottom(new LinkedList<>(3));
+
+
+
+        Assertions.assertEquals(3, LinkedLists.findElement(head, 3).getData());
+        Assertions.assertEquals(2, LinkedLists.findElement(head, 1).getData());
+        Assertions.assertEquals(1, LinkedLists.findElement(head, 0).getData());
+
+    }
+
     // We will use this only for sequential linkedlist, because there's an assertion validating this.
     private int countDuplicatesAndValidateSequentialLinkedList(LinkedList<Integer> head) {
         int duplicates = 0;
