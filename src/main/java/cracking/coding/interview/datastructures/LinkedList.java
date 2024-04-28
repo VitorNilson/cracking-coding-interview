@@ -4,9 +4,10 @@ import java.util.UUID;
 
 public class LinkedList<T> {
 
+    private long length = 1;
     private static long idCounter = 0;
-    private final T data;
-    private long nodeId;
+    private T data;
+    private final long nodeId;
     private LinkedList<T> next;
 
     public LinkedList(T data) {
@@ -26,16 +27,26 @@ public class LinkedList<T> {
         return nodeId;
     }
 
+    public long getLength() {
+        return length;
+    }
+
+    public void setData(T data) {
+        this.data = data;
+    }
+
     public void setNext(LinkedList<T> next) {
         this.next = next;
     }
 
-    public void addToBottom(LinkedList<T> end) {
+    public synchronized void addToBottom(LinkedList<T> end) {
         LinkedList<T> n = this;
 
         while (n.next != null) {
             n = n.next;
         }
+
+        this.length++;
 
         n.next = end;
     }
@@ -46,6 +57,7 @@ public class LinkedList<T> {
         while (temp != null) {
             if (temp.getNext() != null && temp.getNext().getNodeId() == toBeDeleted.nodeId) {
                 temp.setNext(temp.getNext().getNext());
+                this.length--;
                 break;
             }
             temp = temp.getNext();

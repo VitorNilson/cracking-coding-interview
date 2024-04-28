@@ -59,6 +59,60 @@ class LInkedListsTest {
 
     }
 
+    @Test
+    void givenDeleteMiddleElement_ThenLinkedListShouldHaveMiddleElementRemoved() {
+
+        LinkedList<Integer> head = new LinkedList<>(1);
+        head.addToBottom(new LinkedList<>(2));
+        head.addToBottom(new LinkedList<>(999));//Middle
+        head.addToBottom(new LinkedList<>(3));
+
+        LinkedLists.deleteMiddleNode(head);
+
+        Assertions.assertEquals(3, head.getLength());
+        countDuplicatesAndValidateSequentialLinkedList(head);
+
+
+        LinkedList<Integer> head2 = new LinkedList<>(1);
+        head2.addToBottom(new LinkedList<>(2));
+        head2.addToBottom(new LinkedList<>(999));//Middle
+        head2.addToBottom(new LinkedList<>(3));
+        head2.addToBottom(new LinkedList<>(4));
+
+        LinkedLists.deleteMiddleNode(head2);
+
+        Assertions.assertEquals(4, head2.getLength());
+        countDuplicatesAndValidateSequentialLinkedList(head2);
+
+        LinkedList<Integer> head3 = new LinkedList<>(1);
+        head3.addToBottom(new LinkedList<>(2));
+        head3.addToBottom(new LinkedList<>(3));
+        head3.addToBottom(new LinkedList<>(999));//Middle
+        head3.addToBottom(new LinkedList<>(4));
+        head3.addToBottom(new LinkedList<>(5));
+
+        LinkedLists.deleteMiddleNode(head3);
+
+        Assertions.assertEquals(5, head3.getLength());
+        countDuplicatesAndValidateSequentialLinkedList(head3);
+
+
+        LinkedList<Integer> head4 = new LinkedList<>(1);
+        head4.addToBottom(new LinkedList<>(2));
+        head4.addToBottom(new LinkedList<>(3));
+        var middle = new LinkedList<>(999);
+        head4.addToBottom(middle);//Middle
+        head4.addToBottom(new LinkedList<>(4));
+        head4.addToBottom(new LinkedList<>(5));
+
+        LinkedLists.deleteMiddleNode(middle);
+
+        Assertions.assertEquals(5, head4.getLength());
+        countDuplicatesAndValidateSequentialLinkedList(head2);
+
+
+    }
+
     // We will use this only for sequential linkedlist, because there's an assertion validating this.
     private int countDuplicatesAndValidateSequentialLinkedList(LinkedList<Integer> head) {
         int duplicates = 0;

@@ -28,7 +28,7 @@ public class LinkedLists {
 
     //    2.2 Return Kth to Last: Implement an algorithm to find the kth to last element of a singly linked list.
     //            Hints:#8, #25, #41, #67, #126
-    public static LinkedList<Integer> findElement(LinkedList<Integer> head, int pos) {
+    public static LinkedList<Integer> findElement(LinkedList<Integer> head, long pos) {
         int currentIndex = 0;
         LinkedList<Integer> curr = head;
 
@@ -41,4 +41,16 @@ public class LinkedLists {
         }
         return null;
     }
+
+    //    2.3 Delete Middle Node: Implement an algorithm to delete a node in the middle (i.e., any node but
+    //            the first and last node, not necessarily the exact middle) of a singly linked list, given only access to
+    //    that node.
+    //    EXAMPLE
+    //    Input: the node c from the linked list a->b->c->d->e->f
+    //    Result: nothing is returned, but the new linked list looks like a->b->d->e->f
+    //    Hints:#72
+    public static void deleteMiddleNode(LinkedList<Integer> head) {
+        head.delete(findElement(head, head.getLength() / 2));
+    }
+
 }
