@@ -52,7 +52,6 @@ class LInkedListsTest {
         head.addToBottom(new LinkedList<>(3));
 
 
-
         Assertions.assertEquals(3, LinkedLists.findElement(head, 3).getData());
         Assertions.assertEquals(2, LinkedLists.findElement(head, 1).getData());
         Assertions.assertEquals(1, LinkedLists.findElement(head, 0).getData());
@@ -111,6 +110,28 @@ class LInkedListsTest {
         countDuplicatesAndValidateSequentialLinkedList(head2);
 
 
+    }
+
+    @Test
+    void givenPartition_ThenShouldReturnAPartitionedLinkedList() {
+        LinkedList<Integer> head = new LinkedList<>(3);
+        head.addToBottom(new LinkedList<>(5));
+        head.addToBottom(new LinkedList<>(8));
+        head.addToBottom(new LinkedList<>(5));
+        head.addToBottom(new LinkedList<>(10));
+        head.addToBottom(new LinkedList<>(2));
+        head.addToBottom(new LinkedList<>(1));
+
+
+        var result = LinkedLists.partition(head, 5);
+
+        Assertions.assertEquals(1, LinkedLists.findElement(result, 0).getData());
+        Assertions.assertEquals(2, LinkedLists.findElement(result, 1).getData());
+        Assertions.assertEquals(3, LinkedLists.findElement(result, 2).getData());
+        Assertions.assertEquals(5, LinkedLists.findElement(result, 3).getData());
+        Assertions.assertEquals(8, LinkedLists.findElement(result, 4).getData());
+        Assertions.assertEquals(5, LinkedLists.findElement(result, 5).getData());
+        Assertions.assertEquals(10, LinkedLists.findElement(result, 6).getData());
     }
 
     // We will use this only for sequential linkedlist, because there's an assertion validating this.

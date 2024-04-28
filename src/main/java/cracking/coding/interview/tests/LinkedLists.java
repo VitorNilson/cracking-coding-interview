@@ -2,6 +2,8 @@ package cracking.coding.interview.tests;
 
 import cracking.coding.interview.datastructures.LinkedList;
 
+import java.util.Objects;
+
 public class LinkedLists {
 
     //    2.1 Remove dups: Write code to remove duplicates from an unsorted linked list.
@@ -51,6 +53,39 @@ public class LinkedLists {
     //    Hints:#72
     public static void deleteMiddleNode(LinkedList<Integer> head) {
         head.delete(findElement(head, head.getLength() / 2));
+    }
+
+
+    //    2.4 Partition: Write code to partition a linked list around a value x, such that all nodes less than x come
+    //    before all nodes greater than or equal to x. If xis contained within the list, the values of x only need
+    //    to be after the elements less than x (see below). The partition element x can appear anywhere in the
+    //"right partition"; it does not need to appear between the left and right partitions.
+    //    EXAMPLE
+    //    Input:
+    //    Output:
+    //            3 - > 5 - > 8 - > 5 - > 10 - > 2 - > 1 [partition = S]
+    //            3 -> 1 -> 2 -> 10 -> 5 -> 5 -> 8
+    //    Hints: #3, #24
+    public static LinkedList<Integer> partition(LinkedList<Integer> head, Integer pivot) {
+        LinkedList<Integer> result = null;
+        LinkedList<Integer> temp = head;
+
+        while (temp != null) {
+
+            if (result == null) {
+                result = new LinkedList<>(temp.getData());
+            } else if (temp.getData() > pivot || pivot.equals(temp.getData())) {
+                result.addToBottom(new LinkedList<>(temp.getData()));
+            } else {
+                var rs = new LinkedList<>(temp.getData());
+                result.addToStart(rs);
+                result = rs;
+            }
+
+            temp = temp.getNext();
+        }
+
+        return result;
     }
 
 }

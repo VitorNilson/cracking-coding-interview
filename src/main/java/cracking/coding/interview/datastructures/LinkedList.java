@@ -1,7 +1,5 @@
 package cracking.coding.interview.datastructures;
 
-import java.util.UUID;
-
 public class LinkedList<T> {
 
     private long length = 1;
@@ -37,6 +35,11 @@ public class LinkedList<T> {
 
     public void setNext(LinkedList<T> next) {
         this.next = next;
+    }
+
+    public synchronized void addToStart(LinkedList<T> start) {
+        start.setNext(this);
+        start.length = this.length++; //TODO this is not working. Come back here later.
     }
 
     public synchronized void addToBottom(LinkedList<T> end) {
