@@ -88,4 +88,62 @@ public class LinkedLists {
         return result;
     }
 
+
+    //    2.5 Sum Lists: You have two numbers represented by a linked list, where each node contains a single
+    //    digit. The digits are stored in reverse order, such that the 1 's digit is at the head of the list. Write a
+    //    function that adds the two numbers and returns the sum as a linked list.
+    //    EXAMPLE
+    //    lnput:(7-> 1 -> 6) + (5 -> 9 -> 2).Thatis,617 + 295.
+    //    Output: 2 -> 1 -> 9. That is, 912.
+    //    FOLLOW UP
+    //    Suppose the digits are stored in forward order. Repeat the above problem.
+    //    EXAMPLE
+    //    Input: (6 -> 1 -> 7) + (2 -> 9 -> 5).That is, 617 + 295.
+    //    Output: 9 -> 1 -> 2. That is, 912.
+    //    Hints: #7, #30, #71, #95, #109
+    public static LinkedList<Integer> reverseSum(LinkedList<Integer> a, LinkedList<Integer> b) {
+
+        if (a.getLength() != b.getLength()) {
+            var zero = new LinkedList<>(0);
+            if (a.getLength() > b.getLength()) {
+                a.addToStart(zero);
+                a = zero;
+            } else {
+                b.addToStart(zero);
+                b = zero;
+            }
+        }
+
+        long ind = 0;
+        int ttl = 0;
+
+        while (a != null && b != null) {
+            ttl += a.getData() * Math.pow(10, ind);
+            ttl += b.getData() * Math.pow(10, ind++);
+
+            a = a.getNext();
+            b = b.getNext();
+
+        }
+
+        LinkedList<Integer> result = null;
+
+        for (int i = 0; i < Integer.toString(ttl).length(); i++) {
+            int value = Integer.parseInt(String.valueOf(Integer.toString(ttl).charAt(i)));
+
+            if (result == null) {
+                result = new LinkedList<>(value);
+            } else {
+                var rs = new LinkedList<>(value);
+                result.addToStart(rs);
+                result = rs;
+            }
+
+        }
+
+        return result;
+
+    }
+
+
 }

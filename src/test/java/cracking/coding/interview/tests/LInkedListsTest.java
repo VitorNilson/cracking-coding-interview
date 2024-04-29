@@ -134,6 +134,25 @@ class LInkedListsTest {
         Assertions.assertEquals(10, LinkedLists.findElement(result, 6).getData());
     }
 
+    @Test
+    void givenReverseSum_WhenTwoNonNullLinkedListsArePassed_ThenShouldReturnALinkedListWithReverseCharsSum() {
+        LinkedList<Integer> a = new LinkedList<>(0);
+        a.addToBottom( new LinkedList<>(0));
+        a.addToBottom( new LinkedList<>(3));
+
+        LinkedList<Integer> b = new LinkedList<>(0);
+        b.addToBottom( new LinkedList<>(0));
+        b.addToBottom( new LinkedList<>(5));
+
+        var result = LinkedLists.reverseSum(a, b);
+
+        Assertions.assertEquals(0, LinkedLists.findElement(result, 0).getData());
+        Assertions.assertEquals(0, LinkedLists.findElement(result, 1).getData());
+        Assertions.assertEquals(8, LinkedLists.findElement(result, 2).getData());
+
+
+    }
+
     // We will use this only for sequential linkedlist, because there's an assertion validating this.
     private int countDuplicatesAndValidateSequentialLinkedList(LinkedList<Integer> head) {
         int duplicates = 0;
