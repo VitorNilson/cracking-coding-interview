@@ -42,6 +42,18 @@ public class LinkedList<T> {
         start.length = this.length++; //TODO this is not working. Come back here later.
     }
 
+    public void add(LinkedList<T> head, LinkedList<T> item, int pos) {
+        var temp = head;
+        for (int i = 0; i < pos; i++) {
+            temp = temp.getNext();
+        }
+
+        var n = temp.getNext();
+        temp.setNext(item);
+        item.setNext(n);
+
+    }
+
     public synchronized void addToBottom(LinkedList<T> end) {
         LinkedList<T> n = this;
 

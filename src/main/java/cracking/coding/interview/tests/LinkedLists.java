@@ -2,7 +2,14 @@ package cracking.coding.interview.tests;
 
 import cracking.coding.interview.datastructures.LinkedList;
 
+import java.io.Serializable;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class LinkedLists {
 
@@ -30,9 +37,9 @@ public class LinkedLists {
 
     //    2.2 Return Kth to Last: Implement an algorithm to find the kth to last element of a singly linked list.
     //            Hints:#8, #25, #41, #67, #126
-    public static LinkedList<Integer> findElement(LinkedList<Integer> head, long pos) {
+    public static <T> LinkedList<T> findElement(LinkedList<T> head, long pos) {
         int currentIndex = 0;
-        LinkedList<Integer> curr = head;
+        LinkedList<T> curr = head;
 
         while (curr != null) {
             if (currentIndex++ == pos) {
@@ -145,5 +152,92 @@ public class LinkedLists {
 
     }
 
+
+    //    2.6 Palindrome: Implement a function to check if a linked list is a palindrome.
+    //    Hints:#5, #13, #29, #61, #101
+    public static boolean isPalindrome(LinkedList<String> a) {
+
+        long size = a.getLength();
+
+        Map<String, Integer> frequency = buildFrequency(a);
+
+        if (frequency == null) return false;
+
+        String[] sorted = sort(frequency);
+
+        for (int i = sorted.length; i > 0; i--) {
+            if (!sorted[i - 1].equals(sorted[(int) (size - i)])) {
+                return false;
+            }
+        }
+
+        return true;
+
+    }
+
+    private static Map<String, Integer> buildFrequency(LinkedList<String> a) {
+        Map<String, Integer> frequency = new HashMap<>();
+        var temp = a;
+        long size = a.getLength();
+        while (temp != null) {
+            frequency.merge(temp.getData(), 1, Integer::sum);
+            temp = temp.getNext();
+        }
+
+        int pairs = 0;
+
+        for (Map.Entry<String, Integer> v : frequency.entrySet()) {
+            if (v.getValue() % 2 == 0) pairs++;
+        }
+
+
+        if (size / 2 < pairs) {
+            return null;
+        }
+
+        return frequency.entrySet().stream()
+                .sorted((c1, c2) -> c2.getValue().compareTo(c1.getValue()))
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,
+                        (e1, e2) -> e1, LinkedHashMap::new));
+
+    }
+
+    private static String[] sort(Map<String, Integer> frequency) {
+        int size = frequency.entrySet().stream().map(Map.Entry::getValue).reduce((prev, c) -> prev + c).get();
+
+        String[] s = new String[size];
+        var entries = frequency.entrySet().stream().toList();
+        int mapI = 0;
+
+        boolean front = true;
+        for (int i = size; i > 0; i--) {
+            if (mapI == entries.size()) break;
+
+            Map.Entry<String, Integer> v = entries.get(mapI++);
+
+            if (v.getValue() % 2 == 0) {
+                s[size - i] = v.getKey();
+                s[i - 1] = v.getKey();
+                front = !front;
+            } else {
+                int index = front ? (size / 2) + (size - i) / 2 : (size / 2) - (size - i) / 2;
+                front = !front;
+
+                if (s[index] != null) {
+                    if (s[index - 1] == null) {
+                        index -= 1;
+                    } else if (s[index + 1] == null) {
+                        index += 1;
+                    }
+                }
+                s[index] = v.getKey();
+            }
+
+        }
+
+        return s;
+
+
+    }
 
 }

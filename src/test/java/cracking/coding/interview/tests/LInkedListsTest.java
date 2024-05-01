@@ -153,6 +153,37 @@ class LInkedListsTest {
 
     }
 
+    @Test
+    void givenIsPalindrome_WhenAPalindromeLinkedListIsPassed_ThenShouldReturnTrue() {
+        LinkedList<String > head = new LinkedList<>("b");
+        head.addToBottom(new LinkedList<>("o"));
+        head.addToBottom(new LinkedList<>("b"));
+
+        Assertions.assertTrue(LinkedLists.isPalindrome(head));
+
+        LinkedList<String > head2 = new LinkedList<>("o");
+        head2.addToBottom(new LinkedList<>("c"));
+        head2.addToBottom(new LinkedList<>("t"));
+        head2.addToBottom(new LinkedList<>("o"));
+        head2.addToBottom(new LinkedList<>("c"));
+        head2.addToBottom(new LinkedList<>("a"));
+        head2.addToBottom(new LinkedList<>("t"));
+
+
+        Assertions.assertTrue(LinkedLists.isPalindrome(head2));
+    }
+
+    @Test
+    void givenIsPalindrome_WhenANonPalindromeStringIsPassed_ThenShouldReturnFalse() {
+        LinkedList<String > head = new LinkedList<>("s");
+        head.addToBottom(new LinkedList<>("a"));
+        head.addToBottom(new LinkedList<>("t"));
+        head.addToBottom(new LinkedList<>("a"));
+
+        Assertions.assertFalse(LinkedLists.isPalindrome(head));
+
+    }
+
     // We will use this only for sequential linkedlist, because there's an assertion validating this.
     private int countDuplicatesAndValidateSequentialLinkedList(LinkedList<Integer> head) {
         int duplicates = 0;
