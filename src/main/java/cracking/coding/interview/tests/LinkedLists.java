@@ -6,6 +6,7 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -173,6 +174,44 @@ public class LinkedLists {
 
         return true;
 
+    }
+
+    //    2.7 Intersection: Given two (singly) linked lists, determine if the two lists intersect. Return the intersecting node. Note that the intersection is defined based on reference, not value. That is, if the kth
+    //    node of the first linked list is the exact same node (by reference) as the jth node of the second
+    //    linked list, then they are intersecting.
+    //            Hints:#20, #45, #55, #65, #76, #93, #111, #120, #129
+    public static LinkedList<Integer> intersection(LinkedList<Integer> a, LinkedList<Integer> b) {
+
+        if (a.getLength() != b.getLength()) {
+            if (a.getLength() > b.getLength()) {
+                for (int i = 0; i < a.getLength() - b.getLength(); i++) {
+                    var rs = new LinkedList<>(i);
+                    b.addToStart(rs);
+                    b = rs;
+                }
+            } else {
+                for (int i = 0; i < b.getLength() - a.getLength(); i++) {
+                    var rs = new LinkedList<>(i);
+                    a.addToStart(rs);
+                    a = rs;
+                }
+            }
+        }
+
+        var tempA = a;
+        var tempB = b;
+        while (tempA != null && tempB != null) {
+
+            if (tempA.equals(tempB)) {
+                return tempA;
+            }
+
+            tempA = tempA.getNext();
+            tempB = tempB.getNext();
+
+        }
+
+        return null;
     }
 
     private static Map<String, Integer> buildFrequency(LinkedList<String> a) {

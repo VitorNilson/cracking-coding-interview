@@ -137,12 +137,12 @@ class LInkedListsTest {
     @Test
     void givenReverseSum_WhenTwoNonNullLinkedListsArePassed_ThenShouldReturnALinkedListWithReverseCharsSum() {
         LinkedList<Integer> a = new LinkedList<>(0);
-        a.addToBottom( new LinkedList<>(0));
-        a.addToBottom( new LinkedList<>(3));
+        a.addToBottom(new LinkedList<>(0));
+        a.addToBottom(new LinkedList<>(3));
 
         LinkedList<Integer> b = new LinkedList<>(0);
-        b.addToBottom( new LinkedList<>(0));
-        b.addToBottom( new LinkedList<>(5));
+        b.addToBottom(new LinkedList<>(0));
+        b.addToBottom(new LinkedList<>(5));
 
         var result = LinkedLists.reverseSum(a, b);
 
@@ -155,13 +155,13 @@ class LInkedListsTest {
 
     @Test
     void givenIsPalindrome_WhenAPalindromeLinkedListIsPassed_ThenShouldReturnTrue() {
-        LinkedList<String > head = new LinkedList<>("b");
+        LinkedList<String> head = new LinkedList<>("b");
         head.addToBottom(new LinkedList<>("o"));
         head.addToBottom(new LinkedList<>("b"));
 
         Assertions.assertTrue(LinkedLists.isPalindrome(head));
 
-        LinkedList<String > head2 = new LinkedList<>("o");
+        LinkedList<String> head2 = new LinkedList<>("o");
         head2.addToBottom(new LinkedList<>("c"));
         head2.addToBottom(new LinkedList<>("t"));
         head2.addToBottom(new LinkedList<>("o"));
@@ -175,12 +175,55 @@ class LInkedListsTest {
 
     @Test
     void givenIsPalindrome_WhenANonPalindromeStringIsPassed_ThenShouldReturnFalse() {
-        LinkedList<String > head = new LinkedList<>("s");
+        LinkedList<String> head = new LinkedList<>("s");
         head.addToBottom(new LinkedList<>("a"));
         head.addToBottom(new LinkedList<>("t"));
         head.addToBottom(new LinkedList<>("a"));
 
         Assertions.assertFalse(LinkedLists.isPalindrome(head));
+
+    }
+
+    @Test
+    void givenIntersection_WhenTheresAnIntersection_ThenShouldReturnTheIntersectionNode() {
+
+        LinkedList<Integer> intersectionNode = new LinkedList<>(3);
+        intersectionNode.addToBottom(new LinkedList<>(88));
+        intersectionNode.addToBottom(new LinkedList<>(725));
+        intersectionNode.addToBottom(new LinkedList<>(1263));
+
+        LinkedList<Integer> a = new LinkedList<>(1);
+        a.addToBottom(new LinkedList<>(2));
+        a.addToBottom(intersectionNode);
+
+
+        LinkedList<Integer> b = new LinkedList<>(1);
+        b.addToBottom(new LinkedList<>(2));
+        b.addToBottom(new LinkedList<>(82));
+        b.addToBottom(new LinkedList<>(99));
+        b.addToBottom(new LinkedList<>(123));
+        b.addToBottom(new LinkedList<>(23101));
+
+        b.addToBottom(intersectionNode);
+
+        Assertions.assertEquals(intersectionNode, LinkedLists.intersection(a, b));
+
+    }
+
+    @Test
+    void givenIntersection_WhenTheresNoIntersection_ThenShouldReturnNull() {
+
+        LinkedList<Integer> a = new LinkedList<>(1);
+        a.addToBottom(new LinkedList<>(2));
+
+        LinkedList<Integer> b = new LinkedList<>(1);
+        b.addToBottom(new LinkedList<>(2));
+        b.addToBottom(new LinkedList<>(82));
+        b.addToBottom(new LinkedList<>(99));
+        b.addToBottom(new LinkedList<>(123));
+        b.addToBottom(new LinkedList<>(23101));
+
+        Assertions.assertNull(LinkedLists.intersection(a, b));
 
     }
 
