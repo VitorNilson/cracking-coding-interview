@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class StacksAndQueues {
+
+    //    3.1 Three in One: Describe how you could use a single array to implement three stacks.
+    //    Hints: #2, #12, #38, #58
     public static Integer pop(Integer[] stack, WhichStack whichStack) {
         int stackSize = stack.length / 3;
 
@@ -21,6 +24,8 @@ public class StacksAndQueues {
         return null;
     }
 
+    //    3.1 Three in One: Describe how you could use a single array to implement three stacks.
+    //    Hints: #2, #12, #38, #58
     private static Integer popValue(Integer[]stack,  int firtIndex, int finalIndex) {
         for(int i = finalIndex - 1; i >= firtIndex; i--) {
             if(stack[i]!= null) {
@@ -38,6 +43,8 @@ public class StacksAndQueues {
 
     public enum WhichStack {A, B, C}
 
+    //    3.1 Three in One: Describe how you could use a single array to implement three stacks.
+    //    Hints: #2, #12, #38, #58
     public static Integer[] threeInOne(Integer[] threeStacks, int value, WhichStack whichStack) {
 
         if (threeStacks.length % 3 != 0) {
@@ -64,6 +71,8 @@ public class StacksAndQueues {
 
     }
 
+    //    3.1 Three in One: Describe how you could use a single array to implement three stacks.
+    //    Hints: #2, #12, #38, #58
     private static void putValue(Integer[] stack, int value, int firtIndex, int finalIndex) {
         for (int i = firtIndex; i < finalIndex; i++) {
             if (stack[i] == null) {
@@ -73,20 +82,4 @@ public class StacksAndQueues {
         }
     }
 
-
-    public static void pushThreeStack(Integer[] stack, int stackId, int val) {
-        if (stack[stackId] == null) {
-            stack[stackId] = val;
-        } else {
-            int stackSize = stack.length / 3;
-
-            for (int i = 0; i < stackSize - 1; i++) {
-                if (stack[i] != null) {
-                    stack[i + 1] = stack[i];
-                    stack[i] = null;
-                }
-            }
-
-        }
-    }
 }
