@@ -1,5 +1,6 @@
 package cracking.coding.interview.tests;
 
+import cracking.coding.interview.datastructures.Tree;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -27,6 +28,31 @@ class TreeTests {
         Assertions.assertEquals(11, result.root.right.right.data);
 
 
+
+    }
+
+    @Test
+    void givenGetListOfNodes_ThenShouldReturnAMatrixOfNLevels() {
+        Tree<Integer> tree = new Tree<>(new Tree.Node<>(5));
+        tree.add(3);
+        tree.add(7);
+        tree.add(2);
+        tree.add(6);
+        tree.add(8);
+
+        var matrix = Trees.getListOfNodes(tree);
+        Assertions.assertEquals(3, matrix.size());
+        Assertions.assertEquals(1, matrix.get(0).size());
+        Assertions.assertEquals(5, matrix.get(0).get(0).data);
+
+        Assertions.assertEquals(2, matrix.get(1).size());
+        Assertions.assertEquals(3, matrix.get(1).get(0).data);
+        Assertions.assertEquals(7, matrix.get(1).get(1).data);
+
+        Assertions.assertEquals(3, matrix.get(2).size());
+        Assertions.assertEquals(2, matrix.get(2).get(0).data);
+        Assertions.assertEquals(6, matrix.get(2).get(1).data);
+        Assertions.assertEquals(8, matrix.get(2).get(2).data);
 
     }
 }
