@@ -55,4 +55,29 @@ class TreeTests {
         Assertions.assertEquals(8, matrix.get(2).get(2).data);
 
     }
+
+    @Test
+    void givenIsABalancedHeightTree_WhenABalancedHeithTreeIsProvided_ThenShouldReturnTrue() {
+        Tree<Integer> tree = new Tree<>(new Tree.Node<>(3));
+        tree.add(2);
+        tree.add(1);
+        tree.add(5);
+        tree.add(6);
+
+        Assertions.assertTrue(Trees.isABalancedHeightTree(tree));
+    }
+
+
+    @Test
+    void givenIsABalancedHeightTree_WhenAnUnbalancedHeithTreeIsProvided_ThenShouldReturnFalse() {
+        Tree<Integer> tree = new Tree<>(new Tree.Node<>(3));
+        tree.add(2);
+        tree.add(1);
+        tree.add(5);
+        tree.add(6);
+        tree.add(7);
+        tree.add(8);
+
+        Assertions.assertFalse(Trees.isABalancedHeightTree(tree));
+    }
 }

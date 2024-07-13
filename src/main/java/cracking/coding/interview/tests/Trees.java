@@ -72,4 +72,90 @@ public class Trees {
 
         return matrix;
     }
+
+    //    4.4
+    //    Check Balanced: Implement a function to check if a binary tree is balanced. For the purposes of
+    //    this question, a balanced tree is defined to be a tree such that the heights of the two subtrees of any
+    //    node never differ by more than one.
+    //            Hints; #21, #33, #49, #105, #124
+    public static <T extends Comparable<T>> boolean isABalancedHeightTree(Tree<T> tree) {
+
+        final Tree.Node<T> root = tree.root;
+        Map<Tree.Node<T>, Tree.Node<T>> parents = new HashMap<>(); // put a node parent here.
+        Map<Tree.Node<T>, Integer> sum = new HashMap<>(); // put a node parent here.
+        List<List<Tree.Node<T>>> matrix = new ArrayList<>();
+        List<Tree.Node<T>> rootLevel = new ArrayList<>(Arrays.asList(root));
+
+
+        matrix.add(rootLevel);
+
+        int count = 0;
+        boolean hasNext = true;
+
+        while (hasNext) {
+            List<Tree.Node<T>> nodeList = matrix.get(count);
+
+            List<Tree.Node<T>> tempL = new ArrayList<>();
+            for (Tree.Node<T> node : nodeList) {
+                Boolean increased = false;
+                increased = putOnMap(increased, node, node.left, tempL, parents, sum);
+                increased = putOnMap(increased, node, node.right, tempL, parents, sum);
+
+                if (node.left != null || node.right != null) {
+                    increaseParentCount(parents, sum, node);
+                }
+            }
+
+            if (!tempL.isEmpty()) {
+                matrix.add(tempL);
+                count++;
+            } else {
+                hasNext = false;
+            }
+
+        }
+
+        for (var list : matrix) {
+
+            for (int i = 0; i < list.size(); i++) {
+                Tree.Node<T> node = list.get(i);
+                for (int y = 0; y < list.size(); y++) {
+                    System.out.printf("Node x %d, depth x %d | Node y %d, depth y %d", node.data, sum.get(node), list.get(y).data, sum.get(list.get(y)));
+                    System.out.println();
+                    if (sum.get(node) == null || sum.get(list.get(y)) == null) {
+                        continue;
+                    }
+                    if (Math.abs(Math.max(sum.get(node), sum.get(list.get(y))) - Math.min(sum.get(node), sum.get(list.get(y)))) > 1) {
+                        return false;
+                    }
+
+                }
+            }
+        }
+
+        return true;
+    }
+
+
+    private static <T extends Comparable<T>> Boolean putOnMap(Boolean increased, Tree.Node<T> parent, Tree.Node<T> node, List<Tree.Node<T>> tempL, Map<Tree.Node<T>, Tree.Node<T>> parents, Map<Tree.Node<T>, Integer> sum) {
+
+        if (node != null) {
+            parents.put(node, parent);
+            if (!increased) {
+                sum.put(parent, sum.get(parent) != null ? sum.get(parent) + 1 : 1);
+                increased = true;
+            }
+            tempL.add(node);
+            return increased;
+        }
+        return increased;
+    }
+
+    private static <T extends Comparable<T>> void increaseParentCount(Map<Tree.Node<T>, Tree.Node<T>> parents, Map<Tree.Node<T>, Integer> sum, Tree.Node<T> root) {
+        var temp = parents.get(root);
+        if (temp != null) {
+            sum.put(temp, sum.get(temp) + 1);
+            increaseParentCount(parents, sum, temp);
+        }
+    }
 }
