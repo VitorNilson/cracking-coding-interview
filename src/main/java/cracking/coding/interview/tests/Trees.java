@@ -158,4 +158,26 @@ public class Trees {
             increaseParentCount(parents, sum, temp);
         }
     }
+
+    enum Side {L, R}
+
+    //    4.5
+    //    Validate BST: Implement a function to check if a binary tree is a binary search tree.
+    //    Hints: #35, #57, #86, #113, #128
+    public static <T extends Comparable<T>> boolean isABinarySearchTree(Tree<T> tree) {
+        return validateBinarySearchTree(tree.root, null, null);
+    }
+
+    private static <T extends Comparable<T>> boolean validateBinarySearchTree(Tree.Node<T> node, T minVal, T maxVal) {
+        if(node == null) {
+            return true;
+        }
+
+        if((minVal != null && node.data.compareTo(minVal) <=0) || maxVal != null && node.data.compareTo(maxVal) > 0) {
+            return false;
+        }
+
+        return validateBinarySearchTree(node.left, minVal, node.data) &&  validateBinarySearchTree(node.right, node.data, maxVal);
+    }
+
 }

@@ -80,4 +80,32 @@ class TreeTests {
 
         Assertions.assertFalse(Trees.isABalancedHeightTree(tree));
     }
+
+    @Test
+    void givenCheckIfIsABinarySearchTree_WhenABinarySearchTreeIsPassedThenShouldReturnTrue() {
+        Tree<Integer> tree = new Tree<>(new Tree.Node<>(3));
+        tree.add(2);
+        tree.add(1);
+        tree.add(5);
+        tree.add(6);
+        tree.add(7);
+        tree.add(8);
+
+        Assertions.assertTrue(Trees.isABinarySearchTree(tree));
+    }
+
+    @Test
+    void givenCheckIfIsABinarySearchTree_WhenANonBinarySearchTreeIsPassedThenShouldReturnFalse() {
+        Tree<Integer> tree = new Tree<>(new Tree.Node<>(3));
+        tree.add(2);
+        tree.add(1);
+        tree.add(5);
+        tree.add(6);
+        tree.add(7);
+        tree.add(8);
+
+        tree.root.left.right = new Tree.Node<>(18);
+
+        Assertions.assertFalse(Trees.isABinarySearchTree(tree));
+    }
 }
