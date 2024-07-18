@@ -3,7 +3,9 @@ package cracking.coding.interview.tests;
 import cracking.coding.interview.datastructures.Graph;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.opentest4j.AssertionFailedError;
 
+import java.util.ArrayDeque;
 import java.util.Arrays;
 import java.util.List;
 
@@ -122,5 +124,45 @@ class GraphTests {
 
         Graph<Integer> graph = new Graph<>(Arrays.asList(n1, n2, n3, n4, n5, n6, n7, n8, n9, n10, n11, n12, n13));
         Assertions.assertEquals(Arrays.asList(n6, n2, n1, n3, n4, n7, n8), graph.findRouteBetweenTwoNodes(n6, n8));
+    }
+
+    @Test
+    void givenBuildOrder_WhenItsPossibleToGetTheRightBuildOrder_ThenShouldReturnADeque() {
+        //    projects: a, b, c, d, e, f
+        Graph.Node<String> a = new Graph.Node<>("A");
+        Graph.Node<String> b = new Graph.Node<>("B");
+        Graph.Node<String> c = new Graph.Node<>("C");
+        Graph.Node<String> d = new Graph.Node<>("D");
+        Graph.Node<String> e = new Graph.Node<>("E");
+        Graph.Node<String> f = new Graph.Node<>("F");
+
+        //    dependencies: (a, d), (f, b), (b, d), (f, a), (d, c)
+        a.addNeighbour(f);
+        b.addNeighbour(f);
+        c.addNeighbour(d);
+        d.addNeighbour(a);
+        d.addNeighbour(b);
+
+        //    Output: f, e, a, b, d, c || f, e, b, a, d, c (depends on graph order).
+        Graph<String> graph = new Graph<>(Arrays.asList(a, b, c, d, e, f));
+
+        Graphs.buildOrder(graph);
+
+        var result = Graphs.buildOrder(graph);
+        var resultAsList = result.stream().toList();
+
+        Assertions.assertEquals(f, resultAsList.get(0));
+        Assertions.assertEquals(e, resultAsList.get(1));
+
+        try {
+            Assertions.assertEquals(a, resultAsList.get(2));
+            Assertions.assertEquals(b, resultAsList.get(3));
+        } catch (AssertionFailedError ex) {
+            Assertions.assertEquals(b, resultAsList.get(2));
+            Assertions.assertEquals(a, resultAsList.get(3));
+        }
+
+        Assertions.assertEquals(d, resultAsList.get(4));
+        Assertions.assertEquals(c, resultAsList.get(5));
     }
 }
