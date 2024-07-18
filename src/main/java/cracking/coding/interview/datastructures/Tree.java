@@ -52,6 +52,11 @@ public class Tree<T extends Comparable<T>> {
 
     }
 
+    public Integer compare(T val1, T val2) {
+        var naturalComparator =  new NaturalComparator<T>();
+        return naturalComparator.compare(val1, val2);
+    }
+
     static class NaturalComparator<T extends Comparable<T>> implements Comparator<T> {
         public int compare(T a, T b) {
             return a.compareTo(b);
